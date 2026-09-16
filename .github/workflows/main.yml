@@ -1,20 +1,39 @@
-on:
-  push:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   hello_world_job:
+#     name: A job to say hello
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Hello world action step
+#         id: hello
+#         uses: hariii-1122/skills-hello-github-actions@cea34f4f0e7291a8cbd846011922e494692d060f
+#         with:
+#           who-to-greet: Hari the Octocat
+
+#       # Use the output from the `hello` step
+#       - name: Get the output time
+#         run: echo "The time was ${{ steps.hello.outputs.time }}"
+# ///////////was used for create a javascript action using node.js!!!!!!!!!!!!
+
+
+on: [push]
 
 jobs:
   hello_world_job:
-    name: A job to say hello
     runs-on: ubuntu-latest
-
+    name: A job to say hello
     steps:
-      - name: Hello world action step
-        id: hello
-        uses: hariii-1122/skills-hello-github-actions@cea34f4f0e7291a8cbd846011922e494692d060f
+      - uses: actions/checkout@v6
+      - id: foo
+        uses: hariii-1122/skills-hello-github-actions@867e449a3fa24e88696c14ec957459752df4891f
         with:
-          who-to-greet: Hari the Octocat
-
-      # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+          who-to-greet: 'Hari the Octocat'
+      - run: echo random-number "$RANDOM_NUMBER"
+        shell: bash
+        env:
+          RANDOM_NUMBER: ${{ steps.foo.outputs.random-number }}

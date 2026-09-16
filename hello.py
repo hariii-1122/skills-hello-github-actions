@@ -1,3 +1,1 @@
-- name: Test with pytest
-  run: |
-    pytest
+print("Hello World!")
